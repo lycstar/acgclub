@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_cute"
+        android:icon="@drawable/ic_cute"
+        android:title="萌图" />
+    <item
+        android:id="@+id/item_cosplay"
+        android:icon="@drawable/ic_cosplay"
+        android:title="cosplay" />
+
+    <item
+        android:id="@+id/item_gamersky"
+        android:icon="@drawable/ic_comic"
+        android:title="动漫星空" />
+
+</menu>
