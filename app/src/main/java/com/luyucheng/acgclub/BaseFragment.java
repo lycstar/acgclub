@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,12 @@ public class BaseFragment extends Fragment implements BasePictureAdapter.OnItemC
     private String category;
     private int curpage = 1;
 
+    //Fragment的View加载完毕的标记
+    private boolean isViewCreated;
+
+    //Fragment对用户可见的标记
+    private boolean isUIVisible;
+
     public static BaseFragment newInstance(String category) {
         Bundle args = new Bundle();
         BaseFragment fragment = new BaseFragment();
@@ -48,6 +55,35 @@ public class BaseFragment extends Fragment implements BasePictureAdapter.OnItemC
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        isViewCreated = true;
+        lazyLoad();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        //isVisibleToUser这个boolean值表示:该Fragment的UI 用户是否可见
+        if (isVisibleToUser) {
+            isUIVisible = true;
+            lazyLoad();
+        } else {
+            isUIVisible = false;
+        }
+    }
+
+    private void lazyLoad() {
+        //这里进行双重标记判断,是因为setUserVisibleHint会多次回调,并且会在onCreateView执行前回调,必须确保onCreateView加载完毕且页面可见,才加载数据
+        if (isViewCreated && isUIVisible) {
+            //数据加载完毕,恢复标记,防止重复加载
+            isViewCreated = false;
+            isUIVisible = false;
+            requestData();
+        }
+    }
+
     void init(View v) {
         assert getArguments() != null;
         category = getArguments().getString("CATEGORY");
@@ -60,8 +96,6 @@ public class BaseFragment extends Fragment implements BasePictureAdapter.OnItemC
         initLoadMoreListener();
         recyclerView.addOnScrollListener(mParallaxRecyclerViewController);
         recyclerView.setAdapter(adapter);
-
-        requestData();
     }
 
     private void initLoadMoreListener() {
@@ -91,6 +125,7 @@ public class BaseFragment extends Fragment implements BasePictureAdapter.OnItemC
     }
 
     public void requestData() {
+        Log.i(TAG, "requestData: " + "加载数据" + curpage);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://www.rabtman.com")
                 .addConverterFactory(GsonConverterFactory.create())

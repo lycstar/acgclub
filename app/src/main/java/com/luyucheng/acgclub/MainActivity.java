@@ -1,7 +1,6 @@
 package com.luyucheng.acgclub;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +10,9 @@ public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     MenuItem prevMenuItem;
     private ViewPager viewPager;
+//    private String title[] = {"moeimg", "cosplay", "gamersky"};
+//    private BaseFragment baseFragment0, baseFragment1, baseFragment2;
+//    private Fragment[] fragments = {baseFragment0, baseFragment1, baseFragment2};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,24 +21,20 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(3);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-
         bottomNavigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.item_cute:
-                                viewPager.setCurrentItem(0);
-                                break;
-                            case R.id.item_cosplay:
-                                viewPager.setCurrentItem(1);
-                                break;
-                            case R.id.item_gamersky:
-                                viewPager.setCurrentItem(2);
-                                break;
-                        }
-                        return false;
+                item -> {
+                    switch (item.getItemId()) {
+                        case R.id.item_moeimg:
+                            viewPager.setCurrentItem(0);
+                            break;
+                        case R.id.item_cosplay:
+                            viewPager.setCurrentItem(1);
+                            break;
+                        case R.id.item_gamersky:
+                            viewPager.setCurrentItem(2);
+                            break;
                     }
+                    return false;
                 });
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

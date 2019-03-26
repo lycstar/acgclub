@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/item_cute"
+        android:id="@+id/item_moeimg"
         android:icon="@drawable/ic_cute"
         android:title="萌图" />
     <item
