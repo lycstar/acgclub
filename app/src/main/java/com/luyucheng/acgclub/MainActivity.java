@@ -1,10 +1,13 @@
 package com.luyucheng.acgclub;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
@@ -18,6 +21,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final RxPermissions rxPermissions = new RxPermissions(this);
+        rxPermissions
+                .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(granted -> {
+                    if (granted) {
+                        FileUtil.deleteCache();
+                    } else {
+
+                    }
+                });
         viewPager = findViewById(R.id.viewpager);
         viewPager.setOffscreenPageLimit(3);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -80,5 +93,10 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(BaseFragment.newInstance("cosplay"));
         adapter.addFragment(BaseFragment.newInstance("gamersky"));
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

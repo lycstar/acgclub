@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 
@@ -60,7 +60,8 @@ public class BasePictureAdapter extends RecyclerView.Adapter<BasePictureAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String url = urlList.get(holder.getAdapterPosition());
-        Glide.with(mContext).load(url).into(holder.parallaxImageView);
+        GlideApp.with(mContext).load(url).into(holder.parallaxImageView);
+//        diskCacheStrategy(DiskCacheStrategy.NONE)
     }
 
     @Override

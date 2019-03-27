@@ -2,6 +2,7 @@ package com.luyucheng.acgclub;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,16 +10,17 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.FutureTarget;
 import com.bumptech.glide.request.target.Target;
 import com.jaeger.library.StatusBarUtil;
+import com.ortiz.touchview.TouchImageView;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.io.File;
+import java.util.concurrent.ExecutionException;
 
 import cc.shinichi.wallpaperlib.SetWallpaper;
 
@@ -34,8 +36,20 @@ public class PictureActivity extends AppCompatActivity {
         setTranslucent();
         setContentView(R.layout.activity_picture);
         imageUrl = getIntent().getStringExtra("IMGURL");
-        ImageView imageView = findViewById(R.id.iv_full);
-        GlideApp.with(this).load(imageUrl).into(imageView);
+        TouchImageView touchImageView = findViewById(R.id.iv_full);
+        new Thread(() -> {
+            try {
+                Bitmap bitmap = Glide.with(PictureActivity.this)
+                        .asBitmap()
+                        .load(imageUrl)
+                        .submit().get();
+                runOnUiThread(() -> touchImageView.setImageBitmap(bitmap));
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
 
@@ -82,14 +96,18 @@ public class PictureActivity extends AppCompatActivity {
                     // 首先保存图片
                     File pictureFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsoluteFile();
                     File appDir = null;
+                    String fileName = "test";
                     if (isDownload) {
                         appDir = new File(pictureFolder, "AcgClub/AcgClub下载");
-                    } else
+                        fileName = System.currentTimeMillis() + ".jpg";
+                    } else {
                         appDir = new File(pictureFolder, "AcgClub/AcgClub缓存");
+                        fileName = System.currentTimeMillis() + "";
+                    }
                     if (!appDir.exists()) {
                         appDir.mkdirs();
                     }
-                    String fileName = System.currentTimeMillis() + "";
+
                     destFile = new File(appDir, fileName);
                     com.luyucheng.acgclub.FileUtil.copy(file, destFile);
                 } catch (Exception e) {

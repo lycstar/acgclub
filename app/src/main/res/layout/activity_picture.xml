@@ -6,12 +6,13 @@
     tools:context=".PictureActivity"
     tools:showIn="@layout/activity_picture">
 
-    <ImageView
+    <com.ortiz.touchview.TouchImageView
         android:id="@+id/iv_full"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="图片"
-        android:scaleType="centerCrop" />
+        android:scaleType="matrix"
+        android:src="@drawable/ic_comic" />
 
     <LinearLayout
         android:layout_width="match_parent"
