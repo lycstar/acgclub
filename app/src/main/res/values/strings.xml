@@ -1,8 +1,12 @@
 <resources>
-    <string name="app_name">AcgClub</string>
+    <string name="app_name">二次元壁纸</string>
     <string name="title_activity_picture">PictureActivity</string>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="download">保存</string>
+    <string name="setwallpaper">设置壁纸</string>
+    <string name="image">图片</string>
+    <string name="share">分享</string>
 </resources>

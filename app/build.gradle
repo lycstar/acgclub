@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
@@ -46,9 +47,13 @@ dependencies {
 
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
 
-    implementation 'com.github.MartinBZDQSM:ParallaxScrollImageView:v1.0'
+//    implementation 'com.github.MartinBZDQSM:ParallaxScrollImageView:v1.0'
 
-    implementation 'com.jaeger.statusbarutil:library:1.5.1'
+//    implementation 'com.jaeger.statusbarutil:library:1.5.1'
 
     implementation 'com.github.MikeOrtiz:TouchImageView:1.4.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

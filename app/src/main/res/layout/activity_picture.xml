@@ -3,44 +3,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PictureActivity"
+    tools:context=".activity.PictureActivity"
     tools:showIn="@layout/activity_picture">
 
     <com.ortiz.touchview.TouchImageView
         android:id="@+id/iv_full"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="图片"
-        android:scaleType="matrix"
-        android:src="@drawable/ic_comic" />
+        android:contentDescription="@string/image"
+        android:onClick="changeVisible"
+        android:scaleType="centerCrop" />
 
     <LinearLayout
+        android:id="@+id/control_layuout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:layout_alignParentBottom="true">
 
-        <Button
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#80000000"
-            android:onClick="download"
-            android:text="保存到本地"
-            android:textColor="@android:color/white" />
+            android:orientation="vertical">
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:background="#C0C0C0" />
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:onClick="download"
+                android:src="@drawable/ic_download" />
 
-        <Button
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="@string/download"
+                android:textColor="@color/title_color" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#80000000"
-            android:onClick="setWallpaper"
-            android:text="设置壁纸"
-            android:textColor="@android:color/white" />
+            android:orientation="vertical">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:onClick="setWallpaper"
+                android:src="@drawable/ic_wallpaper" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="@string/setwallpaper"
+                android:textColor="@color/title_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:onClick="share"
+                android:src="@drawable/ic_share" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="@string/share"
+                android:textColor="@color/title_color" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

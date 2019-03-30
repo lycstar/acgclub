@@ -1,4 +1,4 @@
-package com.luyucheng.acgclub;
+package com.luyucheng.acgclub.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

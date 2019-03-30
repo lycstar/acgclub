@@ -1,4 +1,4 @@
-package com.luyucheng.acgclub;
+package com.luyucheng.acgclub.util;
 
 import android.os.Environment;
 import android.util.Log;

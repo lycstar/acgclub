@@ -1,5 +1,7 @@
-package com.luyucheng.acgclub;
+package com.luyucheng.acgclub.minterface;
 
+
+import com.luyucheng.acgclub.bean.AcgBean;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

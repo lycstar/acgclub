@@ -1,4 +1,4 @@
-package com.luyucheng.acgclub;
+package com.luyucheng.acgclub.glide;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

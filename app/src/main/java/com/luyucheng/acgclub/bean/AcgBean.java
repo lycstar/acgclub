@@ -1,4 +1,4 @@
-package com.luyucheng.acgclub;
+package com.luyucheng.acgclub.bean;
 
 import java.util.List;
 
