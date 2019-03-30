@@ -1,1 +1,2 @@
-# AcgClub 使用的开源api https://github.com/Rabtman/AcgClub
+# AcgClubFlutter
+使用开源壁纸api https://github.com/Rabtman/AcgClub 开发的简单壁纸app
